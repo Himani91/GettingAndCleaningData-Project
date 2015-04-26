@@ -124,7 +124,8 @@ All the files are inside the directory UCI HAR Dataset.
 ``` 
 
  ### Variables of tidyDataActivity dataset ( which is further written to the TidyDataTable.txt file) 
- ```
+
+```
  > str(tidyDataActivity)
 'data.frame':  180 obs. of  68 variables:
  $ Subject                                         : int  1 2 3 4 5 6 7 8 9 10 ...
@@ -197,3 +198,23 @@ All the files are inside the directory UCI HAR Dataset.
  $ Frequency_body_gyroscopeJerkmagnitude.std..     : num  -0.382 -0.558 -0.549 -0.758 -0.456 ...
 > 
 ```
+
+## Transformations required to clean up the data 
+
+First, created data sets for both test and train data (containing columns : subject, activity, features) - "testDataSet" and "trainDataSet"
+
+Second, combined the two data sets into one - "mergeTestAndTrainData"
+
+Third, extracted the subset of the dataset with columns containing "mean" or "std" values. 
+
+Fourth, gave appropriate full names to the columns. 
+  t -----> time 
+  f -----> frequency
+  acc ----> accelerometer
+  gyro ----> gyroscope
+  mag ------> magnitude
+  BodyBody ----> body
+  
+Fifth, aggregated the dataset by taking the average of each variable for each activity and each subject, tidyDataActivity
+
+Sixth, exported in a file named "TidyDataTable.txt"
