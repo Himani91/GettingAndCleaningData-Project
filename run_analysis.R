@@ -22,7 +22,7 @@ mergeTestAndTrainData <- rbind(testDataSet,trainDataSet)
 ## for each measurement ---------- 
 
 ##contains the column indexes of the column names containing 'mean' or 'std' (std- standard deviation)  
-colIndexofDataMean_SD <- grep(".Mean.*|.*Std." , names(mergeTestAndTrainData), ignore.case=TRUE) 
+colIndexofDataMean_SD <- grep("mean\\(\\)|std\\(\\)" , names(mergeTestAndTrainData), ignore.case=TRUE) 
 ## subset of the main data with only selected columns
 extractDataMean_SD <- data.frame(mergeTestAndTrainData[c(1,2,colIndexofDataMean_SD)]) 
 
@@ -30,27 +30,27 @@ extractDataMean_SD <- data.frame(mergeTestAndTrainData[c(1,2,colIndexofDataMean_
 ##----------3rd Question - Uses descriptive activity names to name the activities in
 ## the data set 1:6 - "WALKING" "WALKING_UPSTAIRS" "WALKING_DOWNSTAIRS" "SITTING" "STANDING" "LAYING"
 
-mergeTestAndTrainData$Activity <- factor(mergeTestAndTrainData$Activity)
+extractDataMean_SD$Activity <- factor(extractDataMean_SD$Activity)
 ## renames the activity lables factors with the activity names. 
-levels(mergeTestAndTrainData$Activity) <- factor(activityNames[,2]) 
+levels(extractDataMean_SD$Activity) <- factor(activityNames[,2]) 
 
 
 ## ----------- 4th Question - Appropriately labels the data set with descriptive variable names-----------
 
 ## renames all the short forms in the column names with the complete names
-names(mergeTestAndTrainData)<-gsub("^t", "Time_", names(mergeTestAndTrainData))
-names(mergeTestAndTrainData)<-gsub("^f", "Frequency_", names(mergeTestAndTrainData))
-names(mergeTestAndTrainData)<-gsub("Acc", "accelerometer", names(mergeTestAndTrainData))
-names(mergeTestAndTrainData)<-gsub("Gyro", "gyroscope", names(mergeTestAndTrainData))
-names(mergeTestAndTrainData)<-gsub("Mag", "magnitude", names(mergeTestAndTrainData))
-names(mergeTestAndTrainData)<-gsub("BodyBody", "body_", names(mergeTestAndTrainData))
+names(extractDataMean_SD)<-gsub("^t", "Time_", names(extractDataMean_SD))
+names(extractDataMean_SD)<-gsub("^f", "Frequency_", names(extractDataMean_SD))
+names(extractDataMean_SD)<-gsub("Acc", "accelerometer", names(extractDataMean_SD))
+names(extractDataMean_SD)<-gsub("Gyro", "gyroscope", names(extractDataMean_SD))
+names(extractDataMean_SD)<-gsub("Mag", "magnitude", names(extractDataMean_SD))
+names(extractDataMean_SD)<-gsub("BodyBody", "body_", names(extractDataMean_SD))
 
 
 ## ----------5th Question - From the data set in step 4, creates a second, independent tidy data 
 ##set with the average of each variable for each activity and each subject----------------------
 
 ## independent tidy data set with the average of each variable for each activity and each subject.
-tidyDataActivity <- aggregate( .~Subject+Activity,mergeTestAndTrainData, FUN=mean)
+tidyDataActivity <- aggregate( .~Subject+Activity,extractDataMean_SD, FUN=mean)
 ## writes the tidyDataActivity data set into a file named - TidyDataTable.txt
 write.table(tidyDataActivity, file = "TidyDataTable.txt",row.name=FALSE)
 
