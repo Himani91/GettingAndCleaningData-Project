@@ -208,11 +208,11 @@ Second, combined the two data sets into one - "mergeTestAndTrainData"
 Third, extracted the subset of the dataset with columns containing "mean" or "std" values. 
 
 Fourth, gave appropriate full names to the columns. 
-  t -----> time 
-  f -----> frequency
-  acc ----> accelerometer
-  gyro ----> gyroscope
-  mag ------> magnitude
+  t -----> time, 
+  f -----> frequency,
+  acc ----> accelerometer,
+  gyro ----> gyroscope,
+  mag ------> magnitude,
   BodyBody ----> body
   
 Fifth, aggregated the dataset by taking the average of each variable for each activity and each subject, tidyDataActivity
